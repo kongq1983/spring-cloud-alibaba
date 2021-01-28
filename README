@@ -1,0 +1,7 @@
+
+
+http://172.16.5.1:8848/nacos/#/configurationManagement?dataId=&group=&appName=
+
+(ip.src_host==172.16.5.1 or ip.dst_host==172.16.5.1) && http
+
+https://blog.csdn.net/weixin_39827589/article/details/111582126
