@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class RestEchoController {
 
-    @Autowired
+    @Autowired // RibbonLoadBalancerClient
     private LoadBalancerClient loadBalancerClient;
     @Autowired
     private RestTemplate restTemplate;

@@ -1,0 +1,30 @@
+
+# 默认：fail_timeout为10s,max_fails为1次
+upstream hbwx_read {
+       #ip_hash;
+       server 192.168.20.121 weight=2 max_fails=5 fail_timeout=2;
+       # server 192.168.20.123 weight=2 max_fails=2 fail_timeout=2;
+}
+####写服务器组  A
+
+
+upstream hbwx_write {
+   #ip_hash;
+   server 192.168.20.122 weight=2 max_fails=10 fail_timeout=2;
+   #server 127.0.0.1:8080 backup;
+}
+
+
+location ~ ^/1[0-9][0-9]/ {
+    proxy_redirect off;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_pass http://172.16.7.53:18080;
+}
+
+
+
+if ( $request_uri ~* /img/test.php ) {
+        set $test P;
+}
