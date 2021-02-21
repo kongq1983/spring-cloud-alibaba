@@ -8,3 +8,15 @@ https://blog.csdn.net/weixin_39827589/article/details/111582126
 
 
 --spring.profiles.active=dev0
+
+## 家里多指定home
+--spring.profiles.active=dev0,home
+
+
+## 配置nacos.com
+C:\Windows\System32\drivers\etc
+
+172.16.5.1 nacos.com
+192.168.3.201 nacos.com
+
+http://localhost:9000/echo/show
