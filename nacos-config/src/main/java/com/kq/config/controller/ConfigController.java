@@ -1,9 +1,13 @@
 package com.kq.config.controller;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.PreDestroy;
+import java.time.LocalDateTime;
 
 /**
  * ConfigController
@@ -15,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RefreshScope
-public class ConfigController {
+public class ConfigController implements DisposableBean {
 
     @Value("${my.name}")
     String name;
@@ -26,7 +30,17 @@ public class ConfigController {
 
     @RequestMapping("/config/info")
     public String info() {
-        return "获取 Nacos Config配置如下：name="  + name + " hobby=" + hobby + "!";
+        return "获取 Nacos Config配置如下：name="  + name + " hobby=" + hobby + "!" + this.toString();
     }
 
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println(LocalDateTime.now()+",ConfigController is destory");
+    }
+
+    @PreDestroy
+    public void destroy1() throws Exception {
+        System.out.println(LocalDateTime.now()+",ConfigController is destory1");
+    }
 }
