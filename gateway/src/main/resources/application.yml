@@ -1,0 +1,23 @@
+
+
+
+server:
+  port: 8000
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: geteway
+  cloud:
+    gateway:
+      routes:
+      - id: jd_route
+        uri: http://www.jd.com
+        predicates:
+        - Path=/jd
+
+
+
+
+
