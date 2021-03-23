@@ -13,6 +13,7 @@
         <module>nacos-user-service</module>
         <module>nacos-config</module>
         <module>gateway</module>
+        <module>local-sentinel</module>
     </modules>
 
     <!--<parent>
