@@ -24,6 +24,9 @@ http://localhost:9000/echo/show
 
 https://github.com/2227324689/Spring-Cloud-Alibaba
 
+http://localhost:8081/echo/hello
+http://172.16.67.21:8081/echo/hello
+
 
 geteway:
 http://localhost:8000/jd
