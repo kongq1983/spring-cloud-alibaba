@@ -30,3 +30,5 @@ http://172.16.67.21:8081/echo/hello
 
 geteway:
 http://localhost:8000/jd
+
+-Dspring.cloud.inetutils.default-ip-address=172.16.69.41
