@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -22,9 +23,12 @@ public class EchoController {
     private AtomicInteger atomicInteger = new AtomicInteger();
 
     @GetMapping(value = "/echo/{string}")
-    public String echo(@PathVariable String string) {
-        String str = atomicInteger.incrementAndGet()+",EchoController.echo port=%d string=%s";
+    public String echo(@PathVariable String string, HttpServletRequest request) {
+        String str = atomicInteger.incrementAndGet()+",EchoController.echo port=%d string=%s server=%s";
         System.out.println("EchoController echo is called. "+atomicInteger.get());
-        return String.format(str,port,string);
+
+        String server = request.getLocalAddr();
+
+        return String.format(str,port,string,server);
     }
 }

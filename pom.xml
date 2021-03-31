@@ -14,6 +14,7 @@
         <module>nacos-config</module>
         <module>gateway</module>
         <module>local-sentinel</module>
+        <module>thirdparty-demo</module>
     </modules>
 
     <!--<parent>

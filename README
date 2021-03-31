@@ -32,3 +32,6 @@ geteway:
 http://localhost:8000/jd
 
 -Dspring.cloud.inetutils.default-ip-address=172.16.69.41
+
+
+java -jar -Dserver.port=8091 nacos-discovery-1.0-SNAPSHOT.jar &
