@@ -42,7 +42,7 @@ public class EchoController {
 
         DtoResult result = new DtoResult();
         result.setSuccess(true);
-        result.setData(str);
+        result.setData(String.format(str,port,string,server));
 
 
         return result;
