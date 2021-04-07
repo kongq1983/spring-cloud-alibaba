@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>spring-cloud-alibaba</artifactId>
-        <groupId>org.example</groupId>
+        <groupId>com.kq</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -26,15 +26,22 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.kq</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+
+
     </dependencies>
 
-    <build>
+    <!--<build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.kq.discovery.NacosDiscoveryApplication</mainClass>　　<!-- 你的主类全路径 -->
+                    <mainClass>com.kq.discovery.NacosDiscoveryApplication</mainClass>　　&lt;!&ndash; 你的主类全路径 &ndash;&gt;
                 </configuration>
                 <executions>
                     <execution>
@@ -45,7 +52,7 @@
                 </executions>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
 
 </project>
