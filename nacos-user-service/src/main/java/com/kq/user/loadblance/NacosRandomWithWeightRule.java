@@ -22,6 +22,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class NacosRandomWithWeightRule extends AbstractLoadBalancerRule {
 
+    public NacosRandomWithWeightRule(){
+        System.out.println("NacosRandomWithWeightRule init");
+    }
+
     protected static Logger logger = LoggerFactory.getLogger(NacosRandomWithWeightRule.class);
 
     @Autowired
