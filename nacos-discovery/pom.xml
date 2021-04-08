@@ -35,13 +35,13 @@
 
     </dependencies>
 
-    <!--<build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.kq.discovery.NacosDiscoveryApplication</mainClass>　　&lt;!&ndash; 你的主类全路径 &ndash;&gt;
+                    <mainClass>com.kq.discovery.NacosDiscoveryApplication</mainClass>　　<!-- 你的主类全路径 -->
                 </configuration>
                 <executions>
                     <execution>
@@ -52,7 +52,7 @@
                 </executions>
             </plugin>
         </plugins>
-    </build>-->
+    </build>
 
 
 </project>
