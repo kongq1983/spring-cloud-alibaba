@@ -1,6 +1,7 @@
 package com.kq.feign.controller;
 
 import com.kq.dto.DtoResult;
+import com.kq.feign.service.EchoService;
 import com.kq.feign.service.FeignService;
 import feign.Param;
 import org.slf4j.Logger;
@@ -26,6 +27,9 @@ public class FeignController {
     @Autowired
     private FeignService feignService;
 
+    @Autowired
+    private EchoService echoService;
+
     @RequestMapping("/feign/{userId}")
     public DtoResult findOrderByUserId(@PathVariable("userId") String userId) {;
 
@@ -34,6 +38,20 @@ public class FeignController {
 
     }
 
+
+    @RequestMapping("/echo/{str}")
+    public DtoResult echo(@PathVariable("str") String str) {;
+
+        logger.info("controller receive str={}",str);
+        String result = echoService.echo(str);
+
+        DtoResult dto = new DtoResult();
+        dto.setData(result);
+        dto.setSuccess(true);
+
+        return dto;
+
+    }
 
 
 

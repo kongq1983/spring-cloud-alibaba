@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient(value = "nacos-discovery")
+@FeignClient(value = "nacos-discovery",contextId = "nacos-discovery-1")
 public interface FeignService {
 
     static Logger logger = LoggerFactory.getLogger(FeignService.class);
