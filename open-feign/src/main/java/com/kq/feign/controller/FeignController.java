@@ -1,5 +1,6 @@
 package com.kq.feign.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.kq.dto.DtoResult;
 import com.kq.feign.service.EchoService;
 import com.kq.feign.service.FeignService;
@@ -38,7 +39,7 @@ public class FeignController {
 
     }
 
-
+//    @SentinelResource("echo")
     @RequestMapping("/echo/{str}")
     public DtoResult echo(@PathVariable("str") String str) {;
 
