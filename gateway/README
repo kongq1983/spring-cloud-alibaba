@@ -1,0 +1,19 @@
+
+# 具体在nacos-user-service
+http://localhost:8000/account/info?id=100
+
+
+# id=168有点怪 会跳到 https://www.baidu.com/search/error.html
+http://localhost:8000/account/info?id=168
+
+------------------------------------------------------------------------------------------
+
+# post
+http://localhost:8000/account/info?id=120
+
+mytoken
+name
+
+------------------------------------------------------------------------------------------
+
+{"name":"wsdc123456","id":123,"orderCode":"1234567890"}

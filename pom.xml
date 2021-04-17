@@ -17,6 +17,7 @@
         <module>thirdparty-demo</module>
         <module>common</module>
         <module>open-feign</module>
+        <module>nacos-order-service</module>
     </modules>
 
     <!--<parent>

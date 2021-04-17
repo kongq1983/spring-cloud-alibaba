@@ -32,15 +32,15 @@ public class GatewayConfiguration {
 //
 //    }
 
-    @Bean
-    public RouteLocator customRouteLocatorAfterTime(RouteLocatorBuilder builder) {
-
-        ZonedDateTime minusTime = LocalDateTime.now().minusHours(1).atZone(ZoneId.systemDefault());
-
-        return builder.routes().route("after_baidu_route",r-> r.after(minusTime)
-                .uri("http://baidu.com")).build();
-
-    }
+//    @Bean
+//    public RouteLocator customRouteLocatorAfterTime(RouteLocatorBuilder builder) {
+//
+//        ZonedDateTime minusTime = LocalDateTime.now().minusHours(1).atZone(ZoneId.systemDefault());
+//
+//        return builder.routes().route("after_baidu_route",r-> r.after(minusTime)
+//                .uri("http://baidu.com")).build();
+//
+//    }
 
 
 }
