@@ -18,6 +18,7 @@
         <module>common</module>
         <module>open-feign</module>
         <module>nacos-order-service</module>
+        <module>gateway-lb</module>
     </modules>
 
     <!--<parent>

@@ -1,0 +1,46 @@
+
+
+
+server:
+  port: 8000
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: geteway
+  cloud:
+    gateway:
+      routes:
+      - id: baidu_route
+        uri: http://www.baidu.com  # 目标服务地址
+        predicates:
+        - Path=/baidu
+
+      # 路径匹配
+      - id: account_info
+        uri: http://localhost:9000/account/info  # 目标服务地址
+        predicates:
+        - Path=/account/info
+
+      # 路径通配匹配
+      - id: 100_forward
+        uri: http://localhost:9000/*  # 目标服务地址
+        predicates:
+          - Path=/100/*
+
+        # 路径通配匹配
+      - id: 101_forward
+        uri: http://localhost:9001/101/*  # 目标服务地址
+        predicates:
+          - Path=/101/*
+
+      # lb
+      - id: account_info
+        uri: lb://user-service
+        predicates:
+          - Path=/user-service/**
+
+
+
+
