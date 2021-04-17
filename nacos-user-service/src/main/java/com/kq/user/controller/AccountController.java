@@ -1,5 +1,6 @@
 package com.kq.user.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/100/account")
 public class AccountController {
 
+    @Value("${server.port}")
+    private Integer serverPort;
+
     @GetMapping
     public String getInfo(@RequestParam("id") String id, HttpServletRequest request){
 
-        return "account:"+id;
+        return "account:"+id+" port="+serverPort;
 
     }
 
@@ -27,7 +31,7 @@ public class AccountController {
         String name = request.getParameter("name");
         String mytoken = request.getHeader("mytoken");
 
-        return String.format("account id=%s,name=%s,mytoken=%s",id,name,mytoken);
+        return String.format("account id=%s,name=%s,mytoken=%s port=%s",id,name,mytoken,serverPort.toString());
 
     }
 
