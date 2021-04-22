@@ -48,4 +48,28 @@ spring:
         predicates:
           - Path=/100/*
 
+      # lb 负载均衡 去掉第1层路径first  /first/100/echo 转发到  /100/echo
+      - id: 100_lb_forward
+        uri: lb://user-service  # 目标服务地址
+        predicates:
+          - Path=/first/100/*
+        filters: #
+          - StripPrefix=1 # 转发之前去掉1层路径
+
+      # lb 前缀匹配  /secnod/102/echo  /myprefix/102/echo
+      - id: 102_lb_forward
+        uri: lb://order-service  # 目标服务地址
+        predicates:
+          - Path=/secnod/102/*
+        filters:
+          - StripPrefix=1 # 转发之前去掉1层路径 取消 /second
+          - PrefixPath=/myprefix    # 路径前面会加myprefix  加上/myprefix
+
+      # lb 负载均衡 url重写
+      - id: 100_cdx_lb_forward
+        uri: lb://user-service  # 目标服务地址
+        predicates:
+          - Path=/cdx/100/**
+        filters: #
+          - RewritePath=/cdx/?(?<segment>.*), /$\{segment}
 
