@@ -39,3 +39,14 @@ http://localhost:8000/jd
 
 
 java -jar -Dserver.port=8091 nacos-discovery-1.0-SNAPSHOT.jar &
+
+======================================================
+gateway-lb -> nacos-user-service -> nacos-discovery
+
+
+http://172.16.69.41:8100/echo/blance
+
+=====================================================
+网关:
+http://localhost:8100/user-service/echo/show
+http://localhost:8100/user-service/echo/blance

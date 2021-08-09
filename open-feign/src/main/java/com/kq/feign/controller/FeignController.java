@@ -32,7 +32,7 @@ public class FeignController {
     private EchoService echoService;
 
     @RequestMapping("/feign/{userId}")
-    public DtoResult findOrderByUserId(@PathVariable("userId") String userId) {;
+    public DtoResult findOrderByUserId(@PathVariable("userId") String userId) {
 
         logger.info("controller receive userId={}",userId);
         return feignService.findOrderByUserId(userId);
