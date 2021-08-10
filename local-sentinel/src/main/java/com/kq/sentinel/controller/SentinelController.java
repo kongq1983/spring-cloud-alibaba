@@ -2,6 +2,7 @@ package com.kq.sentinel.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @date 2021-03-24 16:54
  * @since 2020-0630
  */
-
+@Slf4j
 @RestController
 public class SentinelController {
 
@@ -34,6 +35,8 @@ public class SentinelController {
     }
 
     public String helloBlockHandlerLogic(BlockException exception) {
+
+        log.error("helloBlockHandler 触发限流！");
 
         return "helloBlockHandler 触发限流！"+exception.toString();
 

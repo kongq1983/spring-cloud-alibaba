@@ -23,7 +23,7 @@ import java.util.Map;
  * @since 2020-0630
  */
 @Slf4j
-@Component
+//@Component
 public class MyBlockExceptionHandler implements BlockExceptionHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, BlockException e) throws Exception {

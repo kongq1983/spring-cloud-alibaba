@@ -2,6 +2,7 @@ package com.kq.sentinel.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @date 2021-08-10 16:25
  * @since 2020-0630
  */
+@Slf4j
 @RestController
 public class OrderController {
 
@@ -48,10 +50,12 @@ public class OrderController {
      */
     public String fallbackHandlerLogic(BlockException exception) {
 
+        log.error("fallbackHandlerLogic Order Save 触发限流！");
+
         if(exception!=null) {
-            return "helloBlockHandler Order Save 触发限流！" + exception.toString();
+            return "fallbackHandlerLogic Order Save 触发限流！" + exception.toString();
         }else {
-            return "helloBlockHandler Order Save 触发限流！";
+            return "fallbackHandlerLogic Order Save 触发限流！";
         }
 
     }
