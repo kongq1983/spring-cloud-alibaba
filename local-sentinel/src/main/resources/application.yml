@@ -9,7 +9,9 @@ spring:
     sentinel:
       transport:
         port: 8720
-        dashboard: 172.16.5.1:8900
+        # 这个就是Sentinel-dashborad端口
+        dashboard: 172.16.5.1:10010
+#        dashboard: 172.16.5.1:8900
         client-ip: 172.16.69.41
 
 

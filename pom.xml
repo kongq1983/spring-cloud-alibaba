@@ -37,6 +37,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <my.version>1.0-SNAPSHOT</my.version>
+        <lombok.version>1.18.8</lombok.version>
 
     </properties>
 
@@ -98,6 +99,24 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>-->
+
+        <!-- 开启springboot的应用监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!-- 增加prometheus整合 -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 

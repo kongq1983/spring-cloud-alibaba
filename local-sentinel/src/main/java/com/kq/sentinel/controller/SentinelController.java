@@ -35,7 +35,7 @@ public class SentinelController {
 
     public String helloBlockHandlerLogic(BlockException exception) {
 
-        return "helloBlockHandler 触发限流！";
+        return "helloBlockHandler 触发限流！"+exception.toString();
 
     }
 
