@@ -1,0 +1,1 @@
+spring.cloud.nacos.discovery.server-addr=shr.nacos.com:8848
