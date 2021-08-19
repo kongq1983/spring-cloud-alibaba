@@ -47,6 +47,10 @@ gateway-lb -> nacos-user-service -> nacos-discovery
 http://172.16.69.41:8100/echo/blance
 
 =====================================================
-网关:
+网关:  要启动user-service  nacos-discovery
 http://localhost:8100/user-service/echo/show
 http://localhost:8100/user-service/echo/blance
+
+# 只要user-servie gateway启动
+http://localhost:16800/user-service/account/info?id=100
+http://localhost:16800/100/account?id=200
