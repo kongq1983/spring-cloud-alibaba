@@ -19,6 +19,7 @@
         <module>open-feign</module>
         <module>nacos-order-service</module>
         <module>gateway-lb</module>
+        <module>springboot-rocketmq</module>
     </modules>
 
     <!--<parent>
