@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <springProperty scope="context" name="log.app.name" source="spring.application.name"/>
+    <springProperty scope="context" name="log.level.framework" source="logback.level.framework"/>
+    <springProperty scope="context" name="log.level.service" source="logback.level.service"/>
+    <springProperty scope="context" name="log.level.root" source="logback.level.root"/>
+    <springProperty scope="context" name="log.dir.type" source="logback.dir.type"/>
+    <springProperty scope="context" name="log.dir.custom" source="logback.dir.custom"/>
+    <springProperty scope="context" name="log.current.service.level" source="logback.level.supplier-portal-service"/>
+
+    <if condition='p("log.dir.type").equals("custom")'>
+        <then>
+            <property scope="context" name="log.root.dir" value="${log.dir.custom}"/>
+        </then>
+        <else>
+            <if condition='p("log.dir.type").equals("install")'> <!-- 目前不走这条 -->
+                <then>
+                    <!--<property scope="context" name="log.root.dir" value="./logs/shr/"/>-->  <!-- 程序运行当前目录 -->
+                    <property scope="context" name="log.root.dir" value="${SHR_HOME}/logs"/>
+                </then>
+                <else>
+                    <if condition='p("os.name").contains("Windows")'>
+                        <then>
+                            <property scope="context" name="log.root.dir" value="c:/zyxk/logs/shr/"/>
+                        </then>
+                        <else>
+                            <property scope="context" name="log.root.dir" value="/tmp/logs/shr/"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </else>
+    </if>
+
+    <property name="log.file.suffix" value="%d{yyyyMMdd}_%i.log.zip"/>
+    <property name="log.encoder.pattern" value="%d{yyyy-MM-dd HH:mm:ss:SSS} %-5level [%thread] %logger{50}-%L %msg%n"/>
+    <property name="log.max.history" value="30"/>
+    <property name="log.max.file.size" value="64 MB"/>
+    <property name="log.total.size.cap" value="200 MB"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50}-%msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="APPLICATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.root.dir}/application/${log.app.name}_application_${log.file.suffix}</fileNamePattern>
+            <maxHistory>${log.max.history}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log.max.file.size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <totalSizeCap>${log.total.size.cap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.encoder.pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="SUPPLIER-PORTAL-SERVICE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.root.dir}/supplier_portal/supplier_portal_${log.file.suffix}</fileNamePattern>
+            <maxHistory>${log.max.history}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log.max.file.size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <totalSizeCap>${log.total.size.cap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${log.encoder.pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="com.hzsun.shr.supplier.portal" level="${log.current.service.level}">
+        <appender-ref ref="SUPPLIER-PORTAL-SERVICE"/>
+    </logger>
+
+
+    <logger name="org.springframework.web" level="${log.level.framework}"/>
+    <logger name="org.springframework" level="${log.level.framework}"/>
+    <logger name="om.mchange.v2.resourcepool" level="info"/>
+    <logger name="org.redisson.connection.DNSMonitor" level="info"/>
+    <root level="${log.level.root}">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="APPLICATION"/>
+    </root>
+</configuration>
