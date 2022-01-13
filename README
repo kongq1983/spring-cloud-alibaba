@@ -54,3 +54,10 @@ http://localhost:8100/user-service/echo/blance
 # 只要user-servie gateway启动
 http://localhost:16800/user-service/account/info?id=100
 http://localhost:16800/100/account?id=200
+
+
+---
+DefaultRocketMQListenerContainer
+public void afterPropertiesSet() throws Exception {
+    initRocketMQPushConsumer();
+}
