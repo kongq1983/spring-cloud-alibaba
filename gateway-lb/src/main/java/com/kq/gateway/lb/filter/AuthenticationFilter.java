@@ -1,5 +1,7 @@
 package com.kq.gateway.lb.filter;
 
+import com.alibaba.fastjson.JSON;
+import com.kq.gateway.lb.common.CommonResult;
 import com.kq.gateway.lb.common.ResultCode;
 import com.kq.gateway.lb.exception.GateWayException;
 import lombok.extern.slf4j.Slf4j;
@@ -9,13 +11,18 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -55,11 +62,23 @@ public class AuthenticationFilter implements GlobalFilter, InitializingBean {
         // 或者从请求参数中解析 access_token
         //第一步:解析出我们Authorization的请求头  value为: “bearer XXXXXXXXXXXXXX”
         String authHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
+        if(StringUtils.isEmpty(authHeader)) {
+            List<String> datas = exchange.getRequest().getQueryParams().get("Authorization");
+
+            if(datas!=null && datas.size()>0) {
+                authHeader = datas.get(0);
+            }
+
+        }
+
 
         //第二步:判断Authorization的请求头是否为空
         if(StringUtils.isEmpty(authHeader)) {
             log.warn("需要认证的url,请求头为空");
-            throw new GateWayException(ResultCode.AUTHORIZATION_HEADER_IS_EMPTY);
+//            throw new GateWayException(ResultCode.AUTHORIZATION_HEADER_IS_EMPTY);
+
+           return this.noPower(exchange);
+//            return;
         }
 
         //3. 校验token
@@ -75,6 +94,23 @@ public class AuthenticationFilter implements GlobalFilter, InitializingBean {
         return chain.filter(webExchange);
 
     }
+
+
+    private Mono<Void> noPower(ServerWebExchange serverWebExchange) {
+        // 权限不够拦截
+        serverWebExchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+
+        CommonResult data = CommonResult.failed(ResultCode.GET_TOKEN_KEY_ERROR,"Authorization Is Empty!");
+
+        DataBuffer buffer = serverWebExchange.getResponse().bufferFactory().wrap(JSON.toJSONString(data).getBytes(StandardCharsets.UTF_8));
+        ServerHttpResponse response = serverWebExchange.getResponse();
+        response.setStatusCode(HttpStatus.UNAUTHORIZED);
+        //指定编码，否则在浏览器中会中文乱码
+        response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
+        return response.writeWith(Mono.just(buffer));
+
+    }
+
 
     private ServerWebExchange wrapHeader(ServerWebExchange serverWebExchange) {
 

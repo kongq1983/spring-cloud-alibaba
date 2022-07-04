@@ -8,8 +8,8 @@ spring:
 #      preferred-networks: 172.16.69.41 #,192.168
     sentinel:
       transport:
-        port: 8720
-        # 这个就是Sentinel-dashborad端口
+        port: 8720  # 这个端口配置会在应用对应的机器上启动一个 Http Server，该 Server 会与 Sentinel 控制台做交互。比如 Sentinel 控制台添加了1个限流规则，会把规则数据 push 给这个 Http Server 接收，Http Server 再将规则注册到 Sentinel 中。
+        # 这个就是Sentinel-dashborad端口 配置Sentinel控制台的ip和端口
         dashboard: 172.16.5.1:10010
 #        dashboard: 172.16.5.1:8900
         client-ip: 172.16.69.41

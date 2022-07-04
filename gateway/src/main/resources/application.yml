@@ -35,6 +35,14 @@ spring:
         predicates:
           - Path=/101/*
 
+        # 路径通配匹配
+      - id: domain_forward
+        uri: http://localhost:10000/*  # 目标服务地址
+        predicates:
+          - Path=/200/*
+        filters: #
+          - StripPrefix=1 # 转发之前去掉1层路径 去掉/200
+          - PreserveHostHeader  # 原始主机头
 
 
 

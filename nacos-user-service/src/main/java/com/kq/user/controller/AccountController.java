@@ -26,7 +26,10 @@ public class AccountController {
     @GetMapping
     public String getInfo(@RequestParam("id") String id, HttpServletRequest request){
 
-        return "account:"+id+" port="+serverPort;
+//        String from = request.getParameter("from");
+        String from = request.getHeader("from");
+
+        return "account:"+id+" port="+serverPort+" from="+from;
 
     }
 
