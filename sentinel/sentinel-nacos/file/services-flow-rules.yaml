@@ -1,0 +1,10 @@
+
+
+[{
+  "resource": "simpleDemoFlowRule",
+  "count": 2,
+  "grade": 0,
+  "timeWindow": 10,
+  "minRequestAmount": 2,
+  "slowRatioThreshold": 0.5
+}]

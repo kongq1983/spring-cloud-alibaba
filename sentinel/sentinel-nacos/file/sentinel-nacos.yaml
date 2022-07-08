@@ -1,0 +1,14 @@
+
+
+spring:
+  cloud:
+    sentinel:
+      datasouce:
+        grade-ds:
+          nacos:
+            server-addr: nacos.com:8848
+            dataId: services-flow-rules
+            # groupId: dev
+            ruleType: flow # flow代表流控  degrade 代表熔断
+            username: nacos
+            password: nacos

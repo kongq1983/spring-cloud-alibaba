@@ -1,0 +1,21 @@
+server:
+  port: 18090
+spring.application.name: sentinel-nacos
+spring:
+  main:
+    allow-bean-definition-overriding: true  # 这个要配置bootstrap文件  配置在application.yml起步动
+  messages:
+    basename: i18n/messages
+  cloud:
+    nacos:
+      config:
+        server-addr: nacos.com:8848
+        namespace: dev
+        file-extension: yaml
+        prefix: sentinel-nacos
+#      discovery:
+#        server-addr: nacos.com:8848
+#        server-addr: localhost:8848
+
+
+

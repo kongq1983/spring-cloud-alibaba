@@ -20,6 +20,7 @@
         <module>nacos-order-service</module>
         <module>gateway-lb</module>
         <module>springboot-rocketmq</module>
+        <module>sentinel</module>
     </modules>
 
     <!--<parent>
